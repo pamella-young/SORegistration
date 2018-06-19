@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Success Olympic OTGi</string>
+
+    <string name="app_title">REGISTRATION</string>
+
+    <string name="scan_instruction">Please scan to start</string>
+    <string name="manual_enter">Manually enter the code</string>
+
+    <string name="scan">Scan</string>
+    <string name="search">Search</string>
+
+    <string name="registration_no">Registration No.</string>
+    <string name="name">Name</string>
+    <string name="take_a_photo">Take a Photo</string>
+    <string name="take_another_photo">Take another Photo</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="register">Register</string>
+    <string name="start_again">Start again</string>
+
+    <string name="registration_successful">Registration Successful</string>
+    <string name="title_activity_scan">ScanActivity</string>
+
+    <string name="camera_permission">Please grant camera permission to use the QR Scanner</string>
+
+</resources>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_medium"
+    android:background="@color/colorBackground"
+    tools:context="com.otgindonesia.soregist.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_title"
+        android:textSize="@dimen/text_large"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/margin_large_med"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan_instruction"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_small_med"/>
+
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/scan"
+            android:layout_gravity="center"
+            android:textColor="@color/colorSecondaryText"
+            android:background="@drawable/primary_button"/>
+
+    </LinearLayout>
+
+
+    <!--divider-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="1"
+        android:gravity="center">
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:gravity="center"
+            android:textSize="@dimen/text_small"
+            android:layout_weight="0.1"/>
+
+        <View
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:gravity="center_vertical">
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/manual_enter"-->
+        <!--android:textSize="@dimen/text_medium"-->
+        <!--android:layout_margin="@dimen/margin_small"/>-->
+
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_medium"
+            android:hint="@string/manual_enter"
+            android:textColor="@color/colorHint"
+            android:layout_margin="@dimen/margin_small"
+            android:inputType="text"
+            android:maxLines="1"/>
+
+        <Button
+            android:id="@+id/btn_manualInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:layout_gravity="center"
+            android:textColor="@color/colorSecondaryText"
+            android:background="@drawable/primary_button" />
+
+    </LinearLayout>
+
+</LinearLayout>
