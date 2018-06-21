@@ -27,14 +27,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/registration_no"
+                    android:text="@string/upline_name"
                     android:textSize="@dimen/text_small" />
 
                 <EditText
+                    android:id="@+id/et_upline_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:text="e.g. SO123456789"
+                    android:text="e.g. Ronny dan Lanny"
                     android:textColor="@color/colorHint"
                     android:textSize="@dimen/text_medium" />
 
@@ -49,10 +50,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
+                    android:text="@string/registered_name"
                     android:textSize="@dimen/text_small" />
 
                 <EditText
+                    android:id="@+id/et_registered_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"

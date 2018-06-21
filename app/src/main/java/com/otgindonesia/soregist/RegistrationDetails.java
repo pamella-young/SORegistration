@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.otgindonesia.soregist.Data.TicketModel;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -21,15 +24,24 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
     private final String TAG = this.getClass().getSimpleName();
     ImageView mImageView;
+    EditText et_registeredName, et_uplineName;
     Uri outPutFileUri;
     Button btn_takePhoto, btn_cancel, btn_register;
+    TicketModel ticketModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_details);
 
+        Gson gson = new Gson();
+        String strTicket = getIntent().getStringExtra("ticket");
+        ticketModel = gson.fromJson(strTicket, TicketModel.class);
+
         mImageView = findViewById(R.id.iv_profile_picture);
+
+        et_registeredName = findViewById(R.id.et_registered_name);
+        et_uplineName = findViewById(R.id.et_upline_name);
 
         btn_takePhoto = findViewById(R.id.btn_takePhoto);
         btn_takePhoto.setOnClickListener(this);
@@ -40,6 +52,12 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(this);
 
+        /**
+         * Initialize data
+         */
+
+        et_registeredName.setText(ticketModel.getTicketData().getGivenName());
+        et_uplineName.setText(ticketModel.getTicketData().getUplineName());
     }
 
     @Override

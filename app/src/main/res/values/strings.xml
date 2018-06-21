@@ -9,7 +9,8 @@
     <string name="scan">Scan</string>
     <string name="search">Search</string>
 
-    <string name="registration_no">Registration No.</string>
+    <string name="upline_name">BD Upline Name</string>
+    <string name="registered_name">Registered Name</string>
     <string name="name">Name</string>
     <string name="take_a_photo">Take a Photo</string>
     <string name="take_another_photo">Take another Photo</string>

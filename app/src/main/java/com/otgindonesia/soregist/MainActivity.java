@@ -1,7 +1,6 @@
 package com.otgindonesia.soregist;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,14 +10,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnManual, btnScan;
+    private Button btnScan;
     private Class mClass;
-    private EditText et_code;
     private static final int ZXING_CAMERA_PERMISSION = 1;
 
     @Override
@@ -36,29 +33,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnManual = findViewById(R.id.btn_manualInput);
-        btnManual.setOnClickListener(this);
-
         btnScan = findViewById(R.id.btn_scan);
         btnScan.setOnClickListener(this);
-
-        et_code = findViewById(R.id.et_code);
 
     }
 
     public void onClick(View view){
-        if(view == btnManual){
-            if(!validateManualInput()){
-                Toast.makeText(this, "Code can't be empty", Toast.LENGTH_SHORT).show();
-            }else {
-                Context context = MainActivity.this;
-                Class destination = RegistrationDetails.class;
-                Intent intent = new Intent(context, destination);
-
-                startActivity(intent);
-            }
-        }
-        else if(view == btnScan){
+        if(view == btnScan){
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED){
                 mClass = ScanActivity.class;
@@ -69,20 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         }
-    }
-
-    private boolean validateManualInput(){
-        String manualInput = et_code.getText().toString();
-
-        boolean check = true;
-
-        if(manualInput.isEmpty()){
-            check = false;
-        }else if(manualInput.length() < 5 || manualInput.length() > 15){
-            check = false;
-        }
-
-        return check;
     }
 
     @Override
@@ -100,5 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
         }
     }
+
 }
 
