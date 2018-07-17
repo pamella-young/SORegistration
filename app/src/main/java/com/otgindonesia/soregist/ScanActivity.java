@@ -51,18 +51,19 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 
 
         Log.v(TAG, result.getText());
-        Log.v(TAG, result.getBarcodeFormat().toString());
 
         final Call<TicketModel> ticket = client.getTicket(result.getText());
+
+        final String qrcode = result.getText().toString();
 
         ticket.enqueue(new Callback<TicketModel>() {
             @Override
             public void onResponse(Call<TicketModel> call, Response<TicketModel> response) {
                 Gson gson = new Gson();
 
-
                 Intent intent = new Intent(ScanActivity.this, RegistrationDetails.class);
                 intent.putExtra("ticket", gson.toJson(response.body()));
+                intent.putExtra("qrcode", qrcode);
 
                 startActivity(intent);
             }

@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class TicketModel {
 
+    @SerializedName("qrcode")
+    @Expose
+    private String qrcode;
     @SerializedName("status")
     @Expose
     private String status;
@@ -14,6 +17,14 @@ public class TicketModel {
     @SerializedName("data")
     @Expose
     private TicketDataModel data;
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
+    }
 
     public String getStatus() {
         return status;
