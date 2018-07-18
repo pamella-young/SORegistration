@@ -1,5 +1,6 @@
 package com.otgindonesia.soregist;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,11 +59,7 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
         ticketModel = gson.fromJson(strTicket, TicketModel.class);
         ticketModel.setQrcode(getIntent().getStringExtra("qrcode"));
 
-        if(!isValid(ticketModel)){
-            String errorMsg = ticketModel.getMessage();
-            Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        Toast.makeText(this, ticketModel.getStatus(), Toast.LENGTH_SHORT).show();
 
         imageUri = "";
         mImageView = findViewById(R.id.iv_profile_picture);
@@ -89,20 +86,12 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
         if(isRegistered(ticketModel.getTicketData())){
             viewOnly();
-            Picasso.get().load("https://dev.successolympics.otgindonesia.com/uploads/basic/1530176963-Ticket_TestDummy_28062018_041601.jpg").into(mImageView);
+            Picasso.get().load(ticketModel.getTicketData().getPhoto()).into(mImageView);
 
             et_name.setText(ticketModel.getTicketData().getName());
             et_name.setEnabled(false);
         }
 
-    }
-
-    private boolean isValid(TicketModel ticketModel){
-        if(ticketModel.getStatus()!= "ok"){
-            return false;
-        }else{
-            return true;
-        }
     }
 
     private boolean isRegistered(TicketDataModel data){
@@ -126,11 +115,19 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
             finish();
         }else if(view == btn_register){
             if(imageUri!=""){
+                final ProgressDialog nDialog;
+                nDialog = new ProgressDialog(RegistrationDetails.this);
+                nDialog.setMessage(getString(R.string.loading));
+                nDialog.setTitle(getString(R.string.register_ticket));
+                nDialog.setIndeterminate(false);
+                nDialog.setCancelable(true);
+                nDialog.show();
+
                 File compressedfile = file;
                 try{
                     compressedfile = new Compressor(this).compressToFile(file);
                 }catch (IOException e){
-                    Log.v(TAG, "failed to compress image");
+                    Log.v(TAG, getString(R.string.compress_failed));
                 }
                 //File file = new File(imageUri);
                 RequestBody requestFile =
@@ -154,6 +151,9 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
                         Toast.makeText(RegistrationDetails.this, newTicketStatus.getStatus(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(RegistrationDetails.this, RegistrationSuccess.class);
+
+                        nDialog.dismiss();
+
                         startActivity(intent);
                     }
 
@@ -163,7 +163,7 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
                     }
                 });
             }else{
-                Toast.makeText(this, "Photo's not taken", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.no_photo), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.zxing.Result;
@@ -59,18 +60,25 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
         ticket.enqueue(new Callback<TicketModel>() {
             @Override
             public void onResponse(Call<TicketModel> call, Response<TicketModel> response) {
-                Gson gson = new Gson();
 
-                Intent intent = new Intent(ScanActivity.this, RegistrationDetails.class);
-                intent.putExtra("ticket", gson.toJson(response.body()));
-                intent.putExtra("qrcode", qrcode);
+                if(response.code() == 400){
+                    Toast.makeText(ScanActivity.this, getString(R.string.not_found), Toast.LENGTH_LONG).show();
+                    finish();
+                }else {
+                    Gson gson = new Gson();
 
-                startActivity(intent);
+                    Intent intent = new Intent(ScanActivity.this, RegistrationDetails.class);
+                    intent.putExtra("ticket", gson.toJson(response.body()));
+                    intent.putExtra("qrcode", qrcode);
+
+
+                    startActivity(intent);
+                }
             }
 
             @Override
             public void onFailure(Call<TicketModel> call, Throwable t) {
-
+                Toast.makeText(ScanActivity.this, getString(R.string.connection_failed), Toast.LENGTH_SHORT).show();
             }
         });
 

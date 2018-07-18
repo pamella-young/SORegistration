@@ -22,6 +22,8 @@ import retrofit2.http.Query;
 
 public class RestClient {
 
+    private static final String TICKET_BASE_URL = "https://dev.successolympics.otgindonesia.com/api/";
+
     private static RestAPI service;
 
     public static RestAPI getClient() {
@@ -46,7 +48,7 @@ public class RestClient {
         {
             Retrofit client = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("https://dev.successolympics.otgindonesia.com/api/")
+                    .baseUrl(TICKET_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
