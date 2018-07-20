@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -173,7 +174,10 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
         String fileName = "Ticket_" + ticketModel.getTicketData().getGivenName() + "_" + getCurrentTimestamp();
         file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), fileName + ".jpg");
         //
-        outPutFileUri = Uri.fromFile(file);
+        //outPutFileUri = Uri.fromFile(file);
+        outPutFileUri = FileProvider.getUriForFile(RegistrationDetails.this,
+                BuildConfig.APPLICATION_ID + ".provider",
+                file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
         startActivityForResult(intent, 0);
     }
