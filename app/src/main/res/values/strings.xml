@@ -27,11 +27,10 @@
 
     <string name="camera_permission">Please grant camera permission to use the QR Scanner</string>
 
-
     <!--error messages-->
     <string name="no_photo">Photo\'s not taken</string>
     <string name="compress_failed">Fail to compress image</string>
-    <string name="connection_failed">Pengecekan code gagal</string>
+    <string name="connection_failed">Fail to connect. Please try again</string>
     <string name="not_found">QRCode tidak valid</string>
 
 </resources>

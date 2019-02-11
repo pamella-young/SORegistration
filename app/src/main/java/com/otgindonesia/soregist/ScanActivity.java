@@ -51,7 +51,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     public void handleResult(Result result) {
 
 
-        Log.v(TAG, result.getText());
+        Log.v(TAG, "QR Code:" + result.getText());
 
         final Call<TicketModel> ticket = client.getTicket(result.getText());
 
@@ -79,6 +79,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
             @Override
             public void onFailure(Call<TicketModel> call, Throwable t) {
                 Toast.makeText(ScanActivity.this, getString(R.string.connection_failed), Toast.LENGTH_SHORT).show();
+                //recreate();
             }
         });
 

@@ -45,4 +45,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Version"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/colorHint"
+        />
+
 </LinearLayout>

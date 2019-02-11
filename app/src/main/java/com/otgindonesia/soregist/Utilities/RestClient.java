@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 
 public class RestClient {
 
-    private static final String TICKET_BASE_URL = "https://dev.successolympics.otgindonesia.com/api/";
+    private static final String TICKET_BASE_URL = "https://successolympics.otgindonesia.com/api/";
 
     private static RestAPI service;
 
