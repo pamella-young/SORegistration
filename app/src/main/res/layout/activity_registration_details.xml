@@ -22,22 +22,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:weightSum="5"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/upline_name"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_small"
+                    android:textStyle="bold"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="2"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/et_upline_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:editable="false"
                     android:text="e.g. Ronny dan Lanny"
-                    android:textColor="@color/colorHint"
-                    android:textSize="@dimen/text_medium" />
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_small"
+                    android:layout_weight="3"/>
+
+                <!--<EditText-->
+                    <!--android:id="@+id/et_upline_name"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:editable="false"-->
+                    <!--android:hint="e.g. Ronny dan Lanny"-->
+                    <!--android:textColor="@color/colorHint"-->
+                    <!--android:textSize="@dimen/text_medium" />-->
 
             </LinearLayout>
 
@@ -45,22 +58,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="5">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/registered_name"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_small"
+                    android:textStyle="bold"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_weight="2"/>
 
-                <EditText
+                <TextView
                     android:id="@+id/et_registered_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:editable="false"
                     android:text="e.g. John Doe"
-                    android:textColor="@color/colorHint"
-                    android:textSize="@dimen/text_medium" />
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="@dimen/text_small"
+                    android:layout_weight="3"/>
+
+                <!--<EditText-->
+                    <!--android:id="@+id/et_registered_name"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:editable="false"-->
+                    <!--android:hint="e.g. John Doe"-->
+                    <!--android:textColor="@color/colorHint"-->
+                    <!--android:textSize="@dimen/text_medium" />-->
 
             </LinearLayout>
 
@@ -68,23 +94,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="5">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/name"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_small"
+                    android:layout_weight="2"
+                    android:textStyle="bold"/>
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:inputType="text"
-                    android:text="e.g. John Doe"
+                    android:hint="e.g. John Doe"
                     android:textColor="@color/colorPrimaryText"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_small"
+                    android:layout_weight="3"/>
 
             </LinearLayout>
 
@@ -107,10 +137,11 @@
 
                     <ImageView
                         android:id="@+id/iv_profile_picture"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
                         android:layout_gravity="center_horizontal"
                         android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/default_picture" />
 
                 </FrameLayout>

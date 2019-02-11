@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnScan;
     private Class mClass;
     private static final int ZXING_CAMERA_PERMISSION = 1;
+    private static final String VERSION = "1.0";
+    private TextView tv_version;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnScan = findViewById(R.id.btn_scan);
         btnScan.setOnClickListener(this);
+
+        tv_version = findViewById(R.id.tv_version);
+        tv_version.setText("Version " + VERSION);
+
 
     }
 

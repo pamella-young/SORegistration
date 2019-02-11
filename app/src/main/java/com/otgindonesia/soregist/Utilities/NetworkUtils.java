@@ -9,7 +9,7 @@ import java.net.URL;
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String TICKET_BASE_URL = "https://dev.successolympics.otgindonesia.com/";
+    private static final String TICKET_BASE_URL = "https://successolympics.otgindonesia.com/";
 
     private static final String API_PATH = "api";
     private static final String VALIDATE_TICKET_PATH = "validateTicket";

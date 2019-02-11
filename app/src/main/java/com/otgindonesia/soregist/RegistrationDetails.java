@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -40,13 +41,15 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
     private final String TAG = this.getClass().getSimpleName();
     ImageView mImageView;
-    EditText et_registeredName, et_uplineName, et_name;
+    TextView et_registeredName, et_uplineName;
+    EditText /*et_registeredName, et_uplineName,*/ et_name;
     Uri outPutFileUri;
     Button btn_takePhoto, btn_cancel, btn_register;
     TicketModel ticketModel;
     String imageUri;
     RestClient.RestAPI client;
     File file;
+    String imageFilePath;
     //File compressedImageFile;
 
     @Override
@@ -60,7 +63,7 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
         ticketModel = gson.fromJson(strTicket, TicketModel.class);
         ticketModel.setQrcode(getIntent().getStringExtra("qrcode"));
 
-        Toast.makeText(this, ticketModel.getStatus(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ticketModel.getStatus(), Toast.LENGTH_SHORT).show();
 
         imageUri = "";
         mImageView = findViewById(R.id.iv_profile_picture);
@@ -104,8 +107,8 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
     }
 
     private void viewOnly(){
-        btn_takePhoto.setVisibility(Button.INVISIBLE);
-        btn_register.setVisibility(Button.INVISIBLE);
+        btn_takePhoto.setVisibility(Button.GONE);
+        btn_register.setVisibility(Button.GONE);
     }
 
     @Override
@@ -149,8 +152,7 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onResponse(Call<TicketModel> call, Response<TicketModel> response) {
                         TicketModel newTicketStatus = response.body();
-                        Toast.makeText(RegistrationDetails.this, newTicketStatus.getStatus(), Toast.LENGTH_SHORT).show();
-
+                        //Toast.makeText(RegistrationDetails.this, newTicketStatus.getStatus(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegistrationDetails.this, RegistrationSuccess.class);
 
                         nDialog.dismiss();
@@ -160,7 +162,7 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onFailure(Call<TicketModel> call, Throwable t) {
-
+                        Toast.makeText(RegistrationDetails.this, getString(R.string.connection_failed), Toast.LENGTH_SHORT).show();
                     }
                 });
             }else{
@@ -171,15 +173,32 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
     private void takePictureIntent(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        try{
+            file = createImageFile();
+        }catch (IOException e){
+            Log.v(TAG, "error creating file");
+        }
+
+        if(file!=null) {
+            //outPutFileUri = Uri.fromFile(file);
+            outPutFileUri = FileProvider.getUriForFile(RegistrationDetails.this,
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    file);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
+            startActivityForResult(intent, 0);
+        }
+    }
+
+    private File createImageFile() throws IOException{
         String fileName = "Ticket_" + ticketModel.getTicketData().getGivenName() + "_" + getCurrentTimestamp();
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), fileName + ".jpg");
-        //
-        //outPutFileUri = Uri.fromFile(file);
-        outPutFileUri = FileProvider.getUriForFile(RegistrationDetails.this,
-                BuildConfig.APPLICATION_ID + ".provider",
-                file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutFileUri);
-        startActivityForResult(intent, 0);
+        //file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), fileName + ".jpg");
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                fileName, ".jpg", storageDir
+        );
+
+        return image;
     }
 
     private String getCurrentTimestamp(){
@@ -194,7 +213,8 @@ public class RegistrationDetails extends AppCompatActivity implements View.OnCli
 
         String uri = outPutFileUri.toString();
         Log.e("uri-:", uri);
-        Toast.makeText(this, outPutFileUri.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Image saved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, outPutFileUri.toString(), Toast.LENGTH_LONG).show();
 
         Picasso.get().load(outPutFileUri).into(mImageView);
         imageUri = outPutFileUri.toString();
